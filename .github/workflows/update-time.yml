@@ -1,32 +1,33 @@
-name: Update Profile Clock
+name: Update Profile Heartbeat
 
 on:
   schedule:
-    - cron: "0 0 * * *"
-  workflow_dispatch:
+    - cron: "0 0 * * *" # runs every day at 00:00 UTC
+  workflow_dispatch: # lets you run manually too
+
+permissions:
+  contents: write
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repo
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Update Timestamp
-        env:
-          TZ: "Asia/Dhaka" # Sets the clock to Dhaka time
-        run: |
-          # Format: Feb 26, 2026, 07:30 PM
-          CURRENT_TIME=$(date +"%b %d, %Y, %I:%M %p")
-          TEXT="Last commit was $CURRENT_TIME"
+      - name: Get last commit date
+        id: date
+        run: echo "date=$(git log -1 --format=%cd --date=format:'%B %d, %Y')" >> $GITHUB_OUTPUT
 
-          # Replaces the block between markers with the text
-          sed -i "//,//c\\n$TEXT\n" README.md
-
-      - name: Commit and Push
+      - name: Update README
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          sed -i "s/<!--LAST_COMMIT-->.*/<!--LAST_COMMIT--> ${{ steps.date.outputs.date }}/" README.md
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
           git add README.md
-          # Only push if there's a change
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: update profile timestamp" && git push)
+          git commit -m "chore: update last commit date" || exit 0
+          git push
