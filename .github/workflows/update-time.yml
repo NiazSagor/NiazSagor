@@ -13,13 +13,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Update Timestamp
+        env:
+          TZ: "Asia/Dhaka" # Sets the clock to Dhaka time
         run: |
-          # Create the text string
-          CURRENT_TIME=$(date +"%b %d, %Y at %H:%M UTC")
+          # Format: Feb 26, 2026, 07:30 PM
+          CURRENT_TIME=$(date +"%b %d, %Y, %I:%M %p")
           TEXT="Last commit was $CURRENT_TIME"
 
-          # Use a simpler 'sed' to replace everything between the tags
-          # This version is much harder to break!
+          # Replaces the block between markers with the text
           sed -i "//,//c\\n$TEXT\n" README.md
 
       - name: Commit and Push
@@ -27,5 +28,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          # Only commit if there are actually changes
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: record last commit time" && git push)
+          # Only push if there's a change
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: update profile timestamp" && git push)
