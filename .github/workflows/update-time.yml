@@ -14,15 +14,18 @@ jobs:
 
       - name: Update Timestamp
         run: |
-          CURRENT_DATE=$(date +"%b %d, %Y at %H:%M UTC")
+          # Create the text string
+          CURRENT_TIME=$(date +"%b %d, %Y at %H:%M UTC")
+          TEXT="Last commit was $CURRENT_TIME"
 
-          sed -i '//,//{//!d}' README.md
-          sed -i '//a Last updated on: **'"$CURRENT_DATE"'**' README.md
+          # Use a simpler 'sed' to replace everything between the tags
+          # This version is much harder to break!
+          sed -i "//,//c\\n$TEXT\n" README.md
 
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "docs: sync profile timestamp" || exit 0
-          git push
+          # Only commit if there are actually changes
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: record last commit time" && git push)
