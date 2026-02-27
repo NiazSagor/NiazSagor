@@ -2,8 +2,8 @@ name: Update Profile Heartbeat
 
 on:
   schedule:
-    - cron: "0 0 * * *" # runs every day at 00:00 UTC
-  workflow_dispatch: # lets you run manually too
+    - cron: "0 0 * * *" # every day at 00:00 UTC
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,19 +15,23 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          ref: main  # ensure you’re on the main branch
 
-      - name: Get last commit date
-        id: date
-        run: echo "date=$(git log -1 --format=%cd --date=format:'%B %d, %Y')" >> $GITHUB_OUTPUT
+      - name: Get current timestamp
+        id: timestamp
+        run: |
+          echo "datetime=$(date -u +"%B %d, %Y %H:%M:%S UTC")" >> $GITHUB_OUTPUT
 
       - name: Update README
         run: |
-          sed -i "s/<!--LAST_COMMIT-->.*/<!--LAST_COMMIT--> ${{ steps.date.outputs.date }}/" README.md
+          # Replace the last commit line with a timestamp
+          sed -i "s/<!--LAST_COMMIT-->.*/<!--LAST_COMMIT--> ${{ steps.timestamp.outputs.datetime }}/" README.md
 
       - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add README.md
-          git commit -m "chore: update last commit date" || exit 0
+          git commit -m "chore: update last commit timestamp" || echo "No changes to commit"
           git push
