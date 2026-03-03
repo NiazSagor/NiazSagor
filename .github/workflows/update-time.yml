@@ -2,7 +2,7 @@ name: Update Profile Heartbeat
 
 on:
   schedule:
-    - cron: "0 0 * * *" # every day at 00:00 UTC
+    - cron: "59 23 * * *"
   workflow_dispatch:
 
 permissions:
