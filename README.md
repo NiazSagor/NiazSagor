@@ -64,7 +64,7 @@ I don’t just implement features — I design **UI systems, reusable components
 - Actively exploring and contributing to real-world codebases  
 
 ### 🔹 Activity Overview
-![](https://github-contributor-stats.vercel.app/api?username=NiazSagor&limit=5&theme=gruvbox_light&combine_all_yearly_contributions=true)
+![](https://github-readme-activity-graph.vercel.app/graph?username=NiazSagor&theme=github-light)
 
 ---
 
