@@ -60,16 +60,10 @@ I don’t just implement features — I design **UI systems, reusable components
 ## 🌍 Open Source Contributions
 
 ### 🔹 Notable Contributions
-<!--START_CONTRIB-->
-- https://github.com/NiazSagor/LeetcodePlus
-- https://github.com/NiazSagor/QuickFill
-- https://github.com/NiazSagor/boi_poka
-- https://github.com/NiazSagor/flutter_ecommerce
 - https://github.com/NiazSagor/smart_input_formatters
 - https://github.com/flutter/samples
 - https://github.com/nur-shuvo/LeetcodePlus
 - https://github.com/wger-project/flutter
-<!--END_CONTRIB-->
 
 ---
 
