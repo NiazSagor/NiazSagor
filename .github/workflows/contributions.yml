@@ -20,11 +20,22 @@ jobs:
           | awk '{print "- https://github.com/"$0}' > contributions.txt
 
       - name: Update README
-        run: |
-          sed -i '/<!--START_CONTRIB-->/,/<!--END_CONTRIB-->/c\
-          <!--START_CONTRIB-->\n\
-          '"$(cat contributions.txt)"'\n\
-          <!--END_CONTRIB-->' README.md
+  run: |
+    awk '
+    BEGIN {inside=0}
+    /<!--START_CONTRIB-->/ {
+        print "<!--START_CONTRIB-->"
+        while ((getline line < "contributions.txt") > 0) print line
+        inside=1
+        next
+    }
+    /<!--END_CONTRIB-->/ {
+        print "<!--END_CONTRIB-->"
+        inside=0
+        next
+    }
+    !inside {print}
+    ' README.md > temp.md && mv temp.md README.md
 
       - name: Commit changes
         run: |
