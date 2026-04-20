@@ -64,6 +64,7 @@ I don’t just implement features — I design **UI systems, reusable components
 - Official Flutter Samples: https://github.com/flutter/samples
 - AlgoCode Plus: https://github.com/nur-shuvo/LeetcodePlus
 - wger Flutter App: https://github.com/wger-project/flutter
+- Oinkoin: https://github.com/emavgl/oinkoin
 
 ---
 
