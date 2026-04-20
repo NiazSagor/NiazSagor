@@ -60,10 +60,10 @@ I don’t just implement features — I design **UI systems, reusable components
 ## 🌍 Open Source Contributions
 
 ### 🔹 Notable Contributions
-- https://github.com/NiazSagor/smart_input_formatters
-- https://github.com/flutter/samples
-- https://github.com/nur-shuvo/LeetcodePlus
-- https://github.com/wger-project/flutter
+- Smart Input Formatters: https://github.com/NiazSagor/smart_input_formatters
+- Official Flutter Samples: https://github.com/flutter/samples
+- AlgoCode Plus: https://github.com/nur-shuvo/LeetcodePlus
+- wger Flutter App: https://github.com/wger-project/flutter
 
 ---
 
