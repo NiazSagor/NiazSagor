@@ -60,11 +60,9 @@ I don’t just implement features — I design **UI systems, reusable components
 ## 🌍 Open Source Contributions
 
 ### 🔹 Notable Contributions
-- Contributed to open-source projects (bug fixes, improvements, discussions)  
-- Actively exploring and contributing to real-world codebases  
-
-### 🔹 Activity Overview
-![](https://github-readme-activity-graph.vercel.app/graph?username=NiazSagor&theme=github-light)
+<!--START_CONTRIB-->
+Loading...
+<!--END_CONTRIB-->
 
 ---
 
